@@ -2,8 +2,17 @@
 
 import sys
 
-def making_change(amount, denominations):
-  pass 
+def making_change(amount, denominations = [1, 5, 10, 25, 50]):
+  den_in_play = [num for num in denominations if num <= amount ]
+  ways = [0] * (amount + 1)
+  ways[0] = 1
+  for coin in den_in_play:
+    for i in range(coin, len(ways)):
+      owed = i - coin
+      ways[i] += ways[owed]
+  return ways[amount]
+
+
 
 
 if __name__ == "__main__":
